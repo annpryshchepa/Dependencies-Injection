@@ -3,7 +3,10 @@ import { createIoCContainer } from './ioc';
 
 import type { User } from './types';
 
-const renderUsers = async (users: User[]) => {
+const ioc = createIoCContainer();
+
+const renderUsers = async () => {
+  const users = ioc.resolve('users');
   const listNode = document.getElementById('users-list');
 
   users.forEach((user: User) => {
@@ -18,12 +21,9 @@ const app = () => {
   const config = (window as any).__CONFIG__;
   delete (window as any).__CONFIG__;
 
-  const ioc = createIoCContainer();
   ioc.register('apiConfig', config);
 
-  const users = ioc.resolve('users');
-
-  renderUsers(users);
+  renderUsers();
 };
 
 window.onload = (event: Event) => {
