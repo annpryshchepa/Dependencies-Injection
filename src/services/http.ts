@@ -1,19 +1,20 @@
-import { ILogger, IConfig } from 'src/types';
+import { ILogger } from 'src/types';
+import type { ApiConfig } from '../types'
 
 export class HTTP {
   logger: ILogger;
-  config: IConfig;
+  apiConfig: ApiConfig;
 
-  static $inject = ['logger', 'config'];
+  static $inject = ['logger', 'apiConfig'];
 
-  constructor(logger: ILogger, config: IConfig) {
+  constructor(logger: ILogger, apiConfig: ApiConfig) {
     this.logger = logger;
-    this.config = config;
+    this.apiConfig = apiConfig;
   }
 
   async get(url: string) {
-    const response = await fetch(`${this.config.host}:${this.config.port}`);
-
+    const response = await fetch(`${this.apiConfig.path}${url}`);
+  
     if (response.ok) {
       const responseData = await response.json();
       this.logger.info(`Status: ${response.status}. Response: ${JSON.stringify(responseData)}`);

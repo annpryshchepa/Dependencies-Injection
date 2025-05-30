@@ -1,18 +1,18 @@
 import { HTTP } from './http';
-import config from '../../config.json';
+import type { ApiConfig, User } from '../types';
 
 export class Users {
   http: HTTP;
-  config: any;
+  apiConfig: ApiConfig;
 
-  static $inject = ['http', 'config'];
+  static $inject = ['http', 'apiConfig'];
 
-  constructor(http: HTTP) {
+  constructor(http: HTTP, apiConfig: ApiConfig) {
     this.http = http;
-    this.config = config
+    this.apiConfig = apiConfig;
   }
 
   getUsers() {
-    return this.http.get(`${this.config.common.api.path}${this.config.common.api.resources.users}`);
+    return this.http.get(this.apiConfig.resources.users) as unknown as User[];
   }
 }

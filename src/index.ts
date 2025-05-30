@@ -4,9 +4,10 @@ import { createIoCContainer } from './ioc';
 
 import type { User, ApiConfig } from './types';
 
-const renderUsers = async (config: ApiConfig) => {
+const renderUsers = async () => {
   const ioc = createIoCContainer();
   const users = ioc.resolve('users');
+
 
   const listNode = document.getElementById('users-list');
 
@@ -22,7 +23,10 @@ const app = () => {
   const config = (window as any).__CONFIG__;
   delete (window as any).__CONFIG__;
 
-  renderUsers(config.api);
+  const ioc = createIoCContainer();
+  ioc.registerClass('apiConfig', config);
+
+  renderUsers();
 };
 
 window.onload = (event: Event) => {

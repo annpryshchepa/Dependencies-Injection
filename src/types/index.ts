@@ -8,11 +8,6 @@ export interface ApiConfig {
   resources: { [key: string]: string };
 }
 
-export interface IConfig {
-  host: string;
-  port: number;
-}
-
 export interface ILogger {
   info: (msg: string) => void;
   error: (msg: string) => void;
