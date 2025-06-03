@@ -1,4 +1,6 @@
-export class Logger {
+import { ILogger } from 'src/types';
+
+export class Logger implements ILogger{
   info(message: string) {
     const date = new Date().toISOString();
 

@@ -7,3 +7,9 @@ export interface ApiConfig {
   path: string;
   resources: { [key: string]: string };
 }
+
+export interface ILogger {
+  info: (msg: string) => void;
+  error: (msg: string) => void;
+
+}
